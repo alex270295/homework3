@@ -2,6 +2,7 @@ package com.example.homework3;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +14,10 @@ import android.os.Bundle;
 public class SecondActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.secondLayout);
+        setContentView(R.layout.secondlayout);
+        Bundle bundle = getIntent().getExtras();
+        String result = bundle.getString("translate");
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(result);
     }
 }

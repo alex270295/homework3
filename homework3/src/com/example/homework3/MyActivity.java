@@ -51,9 +51,7 @@ public class MyActivity extends Activity {
 
         String translateFromJSON(String source) throws JSONException {
             JSONObject object = (JSONObject) new JSONTokener(source).nextValue();
-            String result = null;
-            result = object.getString("text").subSequence(2, result.length() - 2).toString();
-            return result;
+            return object.getString("text");
         }
 
 
@@ -103,8 +101,9 @@ public class MyActivity extends Activity {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
                 Intent intent = new Intent();
-                intent.putExtra("translate",result);
+                intent.putExtra("translate", result);
                 intent.setClass(getApplicationContext(), SecondActivity.class);
                 startActivity(intent);
             }

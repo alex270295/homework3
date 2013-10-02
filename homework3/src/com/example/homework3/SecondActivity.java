@@ -15,9 +15,10 @@ public class SecondActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.secondlayout);
+
         Bundle bundle = getIntent().getExtras();
         String result = bundle.getString("translate");
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(result);
-    }
+}
 }

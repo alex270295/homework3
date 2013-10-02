@@ -51,7 +51,9 @@ public class MyActivity extends Activity {
 
         String translateFromJSON(String source) throws JSONException {
             JSONObject object = (JSONObject) new JSONTokener(source).nextValue();
-            return object.getString("text");
+            String result = object.getString("text");
+            result = result.subSequence(2, result.length() - 2).toString();
+            return result;
         }
 
 

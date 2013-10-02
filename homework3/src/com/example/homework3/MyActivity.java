@@ -33,7 +33,7 @@ public class MyActivity extends Activity {
     class Task extends AsyncTask<Void, Void, String> {
 
         String translate() throws IOException {
-            String requestUrl = apiURL + "key=" + apiKey + "&text=" + URLEncoder.encode(source, "UTF-8") + "&lang=en" + "&format=plain" + "&options=1";
+            String requestUrl = apiURL + "key=" + apiKey + "&text=" + URLEncoder.encode(source, "UTF-8") + "&lang=ru-en" + "&format=plain" + "&options=1";
             URL url = new URL(requestUrl);
             HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
             httpConnection.connect();

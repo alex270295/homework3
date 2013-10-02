@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -45,8 +47,7 @@ public class MyActivity extends Activity {
                 }
                 return strBuilder.toString();
             }
-            return "БОРОДА";
-
+            return null;
         }
 
         String translateFromJSON(String source) throws JSONException {
@@ -66,11 +67,16 @@ public class MyActivity extends Activity {
         protected String doInBackground(Void... params) {
             String result = null;
             try {
-                result = translateFromJSON(translate());
+                result = translate();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+            }
+            if (result != null) {
+                try {
+                    result = translateFromJSON(result);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
             return result;
         }
@@ -103,11 +109,15 @@ public class MyActivity extends Activity {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
-
-                Intent intent = new Intent();
-                intent.putExtra("translate", result);
-                intent.setClass(getApplicationContext(), SecondActivity.class);
-                startActivity(intent);
+                if (result == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Ошибка перевода", 2000);
+                    toast.show();
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("translate", result);
+                    intent.setClass(getApplicationContext(), SecondActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
